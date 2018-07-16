@@ -30,8 +30,8 @@ public class DataReader {
 			String wordlistFolderName = "wordlists";
 			String dataFolderName = "data";
 
-			setWordlistDir(jarDir + "\\" + wordlistFolderName);
-			setDataDir(jarDir + "\\" + dataFolderName);
+			setWordlistDir(jarDir + File.separator + wordlistFolderName);
+			setDataDir(jarDir + File.separator + dataFolderName);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +40,7 @@ public class DataReader {
 
 	public Word[] getWordlist(String wordlistName) {
 		Reader reader = null;
-		File wordlistFile = new File(wordlistDir + "\\" + wordlistName);
+		File wordlistFile = new File(wordlistDir + File.separator + wordlistName);
 		if (wordlistFile.exists()) {
 			try {
 				reader = new FileReader(wordlistFile);
@@ -102,7 +102,7 @@ public class DataReader {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
 		String configFileName = "user-config.yml";
-		File configFile = new File(dataDir + "\\" + configFileName);
+		File configFile = new File(dataDir + File.separator + configFileName);
 
 		if (configFile.exists()) {
 			UserConfig config = null;
@@ -125,7 +125,7 @@ public class DataReader {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
 		String userWordDataFileName = "user-word-data.yml";
-		File userWordDataFile = new File(dataDir + "\\" + userWordDataFileName);
+		File userWordDataFile = new File(dataDir + File.separator + userWordDataFileName);
 
 		if (userWordDataFile.exists()) {
 			UserWordData[] userWordDataArr = null;

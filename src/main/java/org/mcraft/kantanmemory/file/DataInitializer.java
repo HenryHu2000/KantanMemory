@@ -25,8 +25,8 @@ public class DataInitializer {
 			String wordlistFolderName = "wordlists";
 			String dataFolderName = "data";
 
-			setWordlistDir(jarDir + "\\" + wordlistFolderName);
-			setDataDir(jarDir + "\\" + dataFolderName);
+			setWordlistDir(jarDir + File.separator + wordlistFolderName);
+			setDataDir(jarDir + File.separator + dataFolderName);
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class DataInitializer {
 
 	public boolean isConfigFileExist() {
 		String configFileName = "user-config.yml";
-		File configFile = new File(dataDir + "\\" + configFileName);
+		File configFile = new File(dataDir + File.separator + configFileName);
 
 		return configFile.exists();
 	}
@@ -64,7 +64,7 @@ public class DataInitializer {
 		}
 
 		String configFileName = "user-config.yml";
-		File configFile = new File(dataDir + "\\" + configFileName);
+		File configFile = new File(dataDir + File.separator + configFileName);
 		UserConfig config = null;
 
 		if (!isConfigFileExist()) {
@@ -105,7 +105,7 @@ public class DataInitializer {
 
 	public boolean isUserWordDataFileExist() {
 		String userWordDataFileName = "user-word-data.yml";
-		File userWordDataFile = new File(dataDir + "\\" + userWordDataFileName);
+		File userWordDataFile = new File(dataDir + File.separator + userWordDataFileName);
 
 		return userWordDataFile.exists();
 	}
@@ -121,7 +121,7 @@ public class DataInitializer {
 			UserWordData[] userWordDataList = new UserWordData[] { null };
 			String userWordDataFileName = "user-word-data.yml";
 
-			File userWordDataFile = new File(dataDir + "\\" + userWordDataFileName);
+			File userWordDataFile = new File(dataDir + File.separator + userWordDataFileName);
 
 			try {
 				userWordDataFile.createNewFile();
@@ -163,7 +163,7 @@ public class DataInitializer {
 		InputStream input = this.getClass().getResourceAsStream(jarWordlistDir + "/" + jarWordlistName);
 		OutputStream output;
 
-		File file = new File(wordlistDir + "\\" + jarWordlistName);
+		File file = new File(wordlistDir + File.separator + jarWordlistName);
 		file.getParentFile().mkdirs();
 		try {
 			file.createNewFile();

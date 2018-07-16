@@ -19,7 +19,7 @@ public class DataWriter {
 			String jarDir = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI())
 					.getParent();
 			String dataFolderName = "data";
-			setDataDir(jarDir + "\\" + dataFolderName);
+			setDataDir(jarDir + File.separator + dataFolderName);
 
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class DataWriter {
 
 	public boolean isConfigFileExist() {
 		String configFileName = "user-config.yml";
-		File configFile = new File(dataDir + "\\" + configFileName);
+		File configFile = new File(dataDir + File.separator + configFileName);
 
 		return configFile.exists();
 	}
@@ -57,7 +57,7 @@ public class DataWriter {
 
 			String configFileName = "user-config.yml";
 
-			File configFile = new File(dataDir + "\\" + configFileName);
+			File configFile = new File(dataDir + File.separator + configFileName);
 			try {
 				configFile.createNewFile();
 				mapper.writeValue(configFile, config);
@@ -75,7 +75,7 @@ public class DataWriter {
 
 	public boolean isUserWordDataFileExist() {
 		String userWordDataFileName = "user-word-data.yml";
-		File userWordDataFile = new File(dataDir + "\\" + userWordDataFileName);
+		File userWordDataFile = new File(dataDir + File.separator + userWordDataFileName);
 
 		return userWordDataFile.exists();
 	}
@@ -97,7 +97,7 @@ public class DataWriter {
 
 			String userWordDataFileName = "user-word-data.yml";
 
-			File userWordDataFile = new File(dataDir + "\\" + userWordDataFileName);
+			File userWordDataFile = new File(dataDir + File.separator + userWordDataFileName);
 
 			try {
 				userWordDataFile.createNewFile();
