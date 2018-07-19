@@ -7,7 +7,7 @@ public class Word implements Comparable<Word> {
 	private int accent;
 
 	// For generating YAML file
-	private Word() {
+	protected Word() {
 
 	}
 

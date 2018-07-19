@@ -11,9 +11,6 @@ import org.mcraft.kantanmemory.kernel.data.Word;
 
 public class AppPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private JLabel wordLabel;
@@ -28,7 +25,6 @@ public class AppPanel extends JPanel {
 	private boolean isFamiliar;
 
 	public AppPanel() {
-		// TODO Auto-generated constructor stub
 
 		wordLabel = new JLabel("", JLabel.CENTER);
 		translationLabel = new JLabel("", JLabel.CENTER);
@@ -70,7 +66,7 @@ public class AppPanel extends JPanel {
 			break;
 		case WORD_QUESTION:
 			initializePanel();
-			wordLabel.setText(word.getName());
+			wordLabel.setText(word.getName() + (word.getAccent() != -1 ? "(" + word.getAccent() + ")" : ""));
 			familiarButton.setEnabled(true);
 			unfamiliarButton.setEnabled(true);
 			break;
@@ -79,7 +75,7 @@ public class AppPanel extends JPanel {
 			wordLabel.setText(
 					"<html><center>" + word.getKana() + (word.getAccent() != -1 ? "(" + word.getAccent() + ")" : "")
 							+ "<br>" + word.getName() + "</center></html>");
-			translationLabel.setText(word.getTranslation());
+			translationLabel.setText("<html><center>" + word.getTranslation() + "</center></html>");
 			continueButton.setEnabled(true);
 			break;
 		default:

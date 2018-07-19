@@ -41,14 +41,13 @@ public class MainClass {
 			wordlist = config.getCurrentWordlist() == null ? "Japanese-wordlist-1.csv" : config.getCurrentWordlist();
 		}
 		config.setCurrentWordlist(wordlist);
+		new DataWriter().saveConfig(config);
 
 		// Handle end of word list case
 		if (new DataReader().getWordlist(wordlist).length <= config.getWordlistProgress(wordlist)) {
 			// End of word list
 			System.out.println("Word list already finished!");
 		}
-
-		new DataWriter().saveConfig(config);
 
 		LearningListManager learningListManager = new LearningListManager();
 
@@ -133,16 +132,24 @@ public class MainClass {
 
 		new DataInitializer().initializeAll();
 		UserConfig config = new DataReader().getConfig();
-		String wordlist = JOptionPane.showInputDialog(frame,
-				"<html><font size=+2>" + "Which word list do you want to learn? (enter file name)" + "</font></html>");
-		if ((wordlist == null) || wordlist.isEmpty()) {
-			wordlist = config.getCurrentWordlist() == null ? "Japanese-wordlist-1.csv" : config.getCurrentWordlist();
-		} else if (!config.getWordlists().contains(wordlist)) {
-			JOptionPane.showMessageDialog(frame,
-					"<html><font size=+2>" + "Word list doesn't exist. Use default instead." + "</font></html>");
-			wordlist = config.getCurrentWordlist() == null ? "Japanese-wordlist-1.csv" : config.getCurrentWordlist();
+
+		String wordlist = "";
+		String[] wordlists = config.getWordlists().toArray(new String[config.getWordlists().size()]);
+		while (true) {
+			try {
+				wordlist = (String) JOptionPane.showInputDialog(frame,
+						"<html><font size=+2>" + "Which word list do you want to learn? (enter file name)"
+								+ "</font></html>",
+						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, wordlists,
+						config.getCurrentWordlist() != null ? config.getCurrentWordlist() : wordlists[0]);
+				if (config.getWordlists().contains(wordlist)) {
+					break;
+				}
+			} catch (Exception e) {
+			}
 		}
 		config.setCurrentWordlist(wordlist);
+		new DataWriter().saveConfig(config);
 
 		// Handle end of word list case
 		if (new DataReader().getWordlist(wordlist).length <= config.getWordlistProgress(wordlist)) {
@@ -151,15 +158,15 @@ public class MainClass {
 					"<html><font size=+2>" + "Word list already finished!" + "</font></html>");
 		}
 
-		new DataWriter().saveConfig(config);
-
 		final LearningListManager learningListManager = new LearningListManager();
 
 		int newWordNum = 0;
+		final int defaultNewWordNum = 10;
 		while (true) {
 			try {
 				newWordNum = Integer.parseInt(JOptionPane.showInputDialog(frame,
-						"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>"));
+						"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>",
+						defaultNewWordNum));
 				if (newWordNum >= 0) {
 					break;
 				}
@@ -238,7 +245,7 @@ public class MainClass {
 			}
 		});
 
-		// Put the first word in GUI
+		// Put the first word into GUI
 		AppPanel appPanel = frame.getAppPanel();
 		appPanel.setState(PanelState.KANA_QUESTION);
 		if (!learningProcess.isTerminated()) {

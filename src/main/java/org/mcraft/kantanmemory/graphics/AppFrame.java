@@ -9,7 +9,7 @@ public class AppFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String FRAME_TITLE = "KantanMemory";
+	public static final String FRAME_TITLE = "KantanMemory";
 
 	private AppPanel appPanel = new AppPanel();
 

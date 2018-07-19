@@ -28,7 +28,7 @@ public class UserWordData implements Comparable<UserWordData> {
 	public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	// For generating YAML file
-	private UserWordData() {
+	protected UserWordData() {
 
 	}
 
