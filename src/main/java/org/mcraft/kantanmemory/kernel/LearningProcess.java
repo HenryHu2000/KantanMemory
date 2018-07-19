@@ -19,30 +19,21 @@ public class LearningProcess {
 	private LinkedList<UserWordData> finishedWordList = new LinkedList<UserWordData>();
 
 	private Deque<LearningWordData> learningWordQueue = new ArrayDeque<LearningWordData>();
-	private int maximumWordQueueLength;
+	private int maximumWordQueueLength = 20;
 
 	private boolean isTerminated;
 
 	public LearningProcess(LearningList learningList) {
-		setMaximumWordQueueLength(20);
 
 		newWordList.addAll(learningList.getRevisionList());
 		newWordList.addAll(learningList.getNewWordList()); // new words at the back
 
-		isTerminated = false;
-
-		addNewWordToQueue(); // Add the first word to queue
-	}
-
-	public LearningProcess(LearningList learningList, int maximumWordQueueLength) {
-		setMaximumWordQueueLength(maximumWordQueueLength);
-
-		newWordList.addAll(learningList.getRevisionList());
-		newWordList.addAll(learningList.getNewWordList()); // new words at the back
-
-		isTerminated = false;
-
-		addNewWordToQueue(); // Add the first word to queue
+		if (!getAllWords().isEmpty()) {
+			isTerminated = false;
+			addNewWordToQueue(); // Add the first word to queue
+		} else {
+			isTerminated = true; // Handle the empty new word list case
+		}
 	}
 
 	public void proceed(boolean isFamiliar) {
@@ -67,7 +58,6 @@ public class LearningProcess {
 	 * @return false if there is no current word
 	 */
 	private boolean handleCurrent(boolean isFamiliar) {
-		// TODO
 
 		LearningWordData currentWordData = getCurrentWordData();
 
@@ -103,12 +93,10 @@ public class LearningProcess {
 
 	private void moveWordToFinished() {
 		finishedWordList.add(learningWordQueue.remove());
-		// TODO
 	}
 
 	private void moveWordToQueueBack() {
 		learningWordQueue.add(learningWordQueue.remove());
-		// TODO
 	}
 
 	/**
@@ -147,7 +135,6 @@ public class LearningProcess {
 	}
 
 	public EnumMap<FamiliarType, Integer> getNumbersOfTypes() {
-		// TODO
 		Map<FamiliarType, Integer> numOfTypesMap = new HashMap<FamiliarType, Integer>();
 		numOfTypesMap.put(FamiliarType.UNFAMILIAR, 0);
 		numOfTypesMap.put(FamiliarType.HALF_FAMILIAR, 0);

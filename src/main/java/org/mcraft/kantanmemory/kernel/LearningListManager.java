@@ -25,6 +25,12 @@ public class LearningListManager {
 	public ArrayList<UserWordData> generateNewWordList(int newWordListSize) {
 		// generate new word list
 		ArrayList<UserWordData> newWordList = new ArrayList<UserWordData>();
+
+		// Handle zero new word case
+		if (newWordListSize == 0) {
+			return newWordList;
+		}
+
 		UserConfig config = new DataReader().getConfig();
 		String currentWordlistName = config.getCurrentWordlist();
 		Word[] currentWordlist = new DataReader().getWordlist(currentWordlistName);
@@ -46,6 +52,12 @@ public class LearningListManager {
 	}
 
 	public ArrayList<UserWordData> generateRevisionList(int revisionListSize) {
+
+		// Handle zero revision word case
+		if (revisionListSize == 0) {
+			return new ArrayList<UserWordData>();
+		}
+
 		UserWordData[] wordDataArr = new DataReader().getUserWordDataList();
 		Arrays.sort(wordDataArr);
 
@@ -77,8 +89,19 @@ public class LearningListManager {
 
 		UserWordData[] wordDataArr = new DataReader().getUserWordDataList();
 
-		List<UserWordData> learnedWords = Arrays.asList(wordDataArr);
-		userWordDataSet.addAll(learnedWords);
+		List<UserWordData> learnedList = Arrays.asList(wordDataArr);
+		for (UserWordData learnedUserWordData : learnedList) {
+			boolean isDuplicate = false;
+			for (UserWordData learningUserWordData : learningList) {
+				if (learnedUserWordData.getWord().equals(learningUserWordData.getWord())) {
+					isDuplicate = true;
+				}
+			}
+			if (!isDuplicate) {
+				userWordDataSet.add(learnedUserWordData);
+			}
+
+		}
 
 		return new DataWriter().saveUserWordDataList(userWordDataSet.toArray(new UserWordData[userWordDataSet.size()]));
 	}

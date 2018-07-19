@@ -1,9 +1,20 @@
 package org.mcraft.kantanmemory;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import org.mcraft.kantanmemory.file.DataInitializer;
 import org.mcraft.kantanmemory.file.DataReader;
 import org.mcraft.kantanmemory.file.DataWriter;
 import org.mcraft.kantanmemory.file.data.UserConfig;
+import org.mcraft.kantanmemory.graphics.AppFrame;
+import org.mcraft.kantanmemory.graphics.AppPanel;
+import org.mcraft.kantanmemory.graphics.PanelState;
 import org.mcraft.kantanmemory.kernel.LearningListManager;
 import org.mcraft.kantanmemory.kernel.LearningProcess;
 import org.mcraft.kantanmemory.kernel.data.FamiliarType;
@@ -13,7 +24,8 @@ import org.mcraft.kantanmemory.kernel.data.LearningWordData;
 public class MainClass {
 
 	public static void main(String[] args) {
-		commandLineUI();
+		// commandLineUI();
+		graphicalUI();
 	}
 
 	public static void commandLineUI() {
@@ -112,4 +124,139 @@ public class MainClass {
 			}
 		}
 	}
+
+	public static void graphicalUI() {
+		// Initialize GUI
+		final AppFrame frame = new AppFrame();
+
+		Scanner in = new Scanner(System.in);
+
+		new DataInitializer().initializeAll();
+		UserConfig config = new DataReader().getConfig();
+		String wordlist = JOptionPane.showInputDialog(frame,
+				"<html><font size=+2>" + "Which word list do you want to learn? (enter file name)" + "</font></html>");
+		if ((wordlist == null) || wordlist.isEmpty()) {
+			wordlist = config.getCurrentWordlist() == null ? "Japanese-wordlist-1.csv" : config.getCurrentWordlist();
+		} else if (!config.getWordlists().contains(wordlist)) {
+			JOptionPane.showMessageDialog(frame,
+					"<html><font size=+2>" + "Word list doesn't exist. Use default instead." + "</font></html>");
+			wordlist = config.getCurrentWordlist() == null ? "Japanese-wordlist-1.csv" : config.getCurrentWordlist();
+		}
+		config.setCurrentWordlist(wordlist);
+
+		// Handle end of word list case
+		if (new DataReader().getWordlist(wordlist).length <= config.getWordlistProgress(wordlist)) {
+			// End of word list
+			JOptionPane.showMessageDialog(frame,
+					"<html><font size=+2>" + "Word list already finished!" + "</font></html>");
+		}
+
+		new DataWriter().saveConfig(config);
+
+		final LearningListManager learningListManager = new LearningListManager();
+
+		int newWordNum = 0;
+		while (true) {
+			try {
+				newWordNum = Integer.parseInt(JOptionPane.showInputDialog(frame,
+						"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>"));
+				if (newWordNum >= 0) {
+					break;
+				}
+			} catch (Exception e) {
+			}
+		}
+		LearningList learningList = learningListManager.generateLearningList(newWordNum, newWordNum * 5);
+		final LearningProcess learningProcess = new LearningProcess(learningList);
+
+		// Set listeners for GUI buttons
+		frame.getAppPanel().getFamiliarButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AppPanel appPanel = frame.getAppPanel();
+				switch (appPanel.getState()) {
+				case KANA_QUESTION:
+					appPanel.setFamiliar(true);
+					break;
+				case WORD_QUESTION:
+					if (learningProcess.getCurrentWordData().getFamiliarType() != FamiliarType.UNFAMILIAR) {
+						// Familiar and half-familiar words are expected to be familiar at the first try
+						appPanel.setFamiliar(false);
+					} else {
+						appPanel.setFamiliar(true);
+					}
+					break;
+				default:
+					break;
+				}
+				appPanel.setState(PanelState.ANSWER); // Continue to answer state
+				appPanel.refreshPanel(learningProcess.getCurrentWordData().getWord());
+
+			}
+		});
+		frame.getAppPanel().getUnfamiliarButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AppPanel appPanel = frame.getAppPanel();
+				switch (appPanel.getState()) {
+				case KANA_QUESTION:
+					appPanel.setFamiliar(false);
+					appPanel.setState(PanelState.WORD_QUESTION);
+					break;
+				case WORD_QUESTION:
+					appPanel.setFamiliar(false);
+					appPanel.setState(PanelState.ANSWER);
+					break;
+				default:
+					break;
+				}
+
+				appPanel.refreshPanel(learningProcess.getCurrentWordData().getWord());
+
+			}
+		});
+		frame.getAppPanel().getContinueButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				AppPanel appPanel = frame.getAppPanel();
+				if (appPanel.getState() == PanelState.ANSWER) {
+					learningProcess.proceed(appPanel.isFamiliar());
+					if (learningProcess.isTerminated()) {
+						appPanel.initializePanel();
+						appPanel.getWordLabel().setText("All words finished!");
+						learningListManager.saveLearningList(learningProcess.getFinishedWordList());
+						return;
+					}
+					if (learningProcess.getCurrentWordData().getFamiliarType() != FamiliarType.UNFAMILIAR) {
+						appPanel.setState(PanelState.KANA_QUESTION);
+					} else {
+						appPanel.setState(PanelState.WORD_QUESTION);
+					}
+				}
+				appPanel.refreshPanel(learningProcess.getCurrentWordData().getWord());
+			}
+		});
+
+		// Put the first word in GUI
+		AppPanel appPanel = frame.getAppPanel();
+		appPanel.setState(PanelState.KANA_QUESTION);
+		if (!learningProcess.isTerminated()) {
+			appPanel.refreshPanel(learningProcess.getCurrentWordData().getWord());
+		} else {
+			appPanel.initializePanel();
+			appPanel.getWordLabel().setText("All words finished!");
+		}
+
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				learningListManager.saveLearningList(learningProcess.getAllWords());
+				System.exit(0);
+			}
+		});
+
+		in.close();
+	}
+
 }
