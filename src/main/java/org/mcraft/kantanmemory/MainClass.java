@@ -142,6 +142,9 @@ public class MainClass {
 								+ "</font></html>",
 						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, wordlists,
 						config.getCurrentWordlist() != null ? config.getCurrentWordlist() : wordlists[0]);
+				if (wordlist == null) {
+					System.exit(0);
+				}
 				if (config.getWordlists().contains(wordlist)) {
 					break;
 				}
@@ -164,9 +167,14 @@ public class MainClass {
 		final int defaultNewWordNum = 10;
 		while (true) {
 			try {
-				newWordNum = Integer.parseInt(JOptionPane.showInputDialog(frame,
+				Object newWordNumObj = JOptionPane.showInputDialog(frame,
 						"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>",
-						defaultNewWordNum));
+						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null,
+						new Integer[] { 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100 }, defaultNewWordNum);
+				if (newWordNumObj == null) {
+					System.exit(0);
+				}
+				newWordNum = (int) newWordNumObj;
 				if (newWordNum >= 0) {
 					break;
 				}
