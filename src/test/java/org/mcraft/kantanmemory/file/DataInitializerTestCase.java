@@ -48,7 +48,7 @@ public class DataInitializerTestCase {
 	@Test
 	public final void testInitializeConfig() {
 
-		String configFilePath = dataInitializer.getDataDir() + "\\" + "user-config.yml";
+		String configFilePath = dataInitializer.getDataDir() + File.separator + "user-config.yml";
 		try {
 			Files.deleteIfExists(Paths.get(configFilePath));
 		} catch (IOException e) {
@@ -63,7 +63,7 @@ public class DataInitializerTestCase {
 
 	@Test
 	public final void testInitializeUserWordDataFile() {
-		String userWordDataFilePath = dataInitializer.getDataDir() + "\\" + "user-word-data.yml";
+		String userWordDataFilePath = dataInitializer.getDataDir() + File.separator + "user-word-data.yml";
 		try {
 			Files.deleteIfExists(Paths.get(userWordDataFilePath));
 		} catch (IOException e) {
@@ -94,23 +94,25 @@ public class DataInitializerTestCase {
 
 		assertTrue("directory not created", new File(dataInitializer.getWordlistDir()).exists());
 		assertTrue("wordlist 1 not copied",
-				new File(dataInitializer.getWordlistDir() + "\\Japanese-wordlist-1.csv").exists());
+				new File(dataInitializer.getWordlistDir() + File.separator + "Japanese-wordlist-1.csv").exists());
 		assertTrue("wordlist 2 not copied",
-				new File(dataInitializer.getWordlistDir() + "\\Japanese-wordlist-2.csv").exists());
+				new File(dataInitializer.getWordlistDir() + File.separator + "Japanese-wordlist-2.csv").exists());
 
 		// Shouldn't copy word lists if directory does exist
 		try {
-			Files.deleteIfExists(Paths.get(dataInitializer.getWordlistDir() + "\\Japanese-wordlist-1.csv"));
-			Files.deleteIfExists(Paths.get(dataInitializer.getWordlistDir() + "\\Japanese-wordlist-2.csv"));
+			Files.deleteIfExists(
+					Paths.get(dataInitializer.getWordlistDir() + File.separator + "Japanese-wordlist-1.csv"));
+			Files.deleteIfExists(
+					Paths.get(dataInitializer.getWordlistDir() + File.separator + "Japanese-wordlist-2.csv"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		assertFalse("wordlist 1 not copied",
-				new File(dataInitializer.getWordlistDir() + "\\Japanese-wordlist-1.csv").exists());
+				new File(dataInitializer.getWordlistDir() + File.separator + "Japanese-wordlist-1.csv").exists());
 		assertFalse("wordlist 2 not copied",
-				new File(dataInitializer.getWordlistDir() + "\\Japanese-wordlist-2.csv").exists());
+				new File(dataInitializer.getWordlistDir() + File.separator + "Japanese-wordlist-2.csv").exists());
 
 	}
 

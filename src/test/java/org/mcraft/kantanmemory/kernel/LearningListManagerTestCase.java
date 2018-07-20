@@ -66,7 +66,7 @@ public class LearningListManagerTestCase {
 		dataInitializer.initializeWordlists();
 
 		// Make sure user word data file is there
-		String userWordDataFilePath = dataInitializer.getDataDir() + "\\" + "user-word-data.yml";
+		String userWordDataFilePath = dataInitializer.getDataDir() + File.separator + "user-word-data.yml";
 		try {
 			Files.deleteIfExists(Paths.get(userWordDataFilePath));
 		} catch (IOException e) {
@@ -132,7 +132,7 @@ public class LearningListManagerTestCase {
 		dataInitializer.initializeWordlists();
 
 		// Make sure user word data file is there
-		String userWordDataFilePath = dataInitializer.getDataDir() + "\\" + "user-word-data.yml";
+		String userWordDataFilePath = dataInitializer.getDataDir() + File.separator + "user-word-data.yml";
 		try {
 			Files.deleteIfExists(Paths.get(userWordDataFilePath));
 		} catch (IOException e) {
@@ -207,7 +207,7 @@ public class LearningListManagerTestCase {
 		dataInitializer.initializeWordlists();
 
 		// Make sure user word data file is there
-		String userWordDataFilePath = dataInitializer.getDataDir() + "\\" + "user-word-data.yml";
+		String userWordDataFilePath = dataInitializer.getDataDir() + File.separator + "user-word-data.yml";
 		try {
 			Files.deleteIfExists(Paths.get(userWordDataFilePath));
 		} catch (IOException e) {
@@ -258,7 +258,7 @@ public class LearningListManagerTestCase {
 		dataInitializer.initializeWordlists();
 
 		// Make sure user word data file is there
-		String userWordDataFilePath = dataInitializer.getDataDir() + "\\" + "user-word-data.yml";
+		String userWordDataFilePath = dataInitializer.getDataDir() + File.separator + "user-word-data.yml";
 		try {
 			Files.deleteIfExists(Paths.get(userWordDataFilePath));
 		} catch (IOException e) {
