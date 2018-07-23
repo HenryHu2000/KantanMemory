@@ -13,11 +13,11 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mcraft.kantanmemory.core.data.UserWordData;
+import org.mcraft.kantanmemory.core.data.Word;
 import org.mcraft.kantanmemory.file.DataInitializer;
 import org.mcraft.kantanmemory.file.DataReader;
 import org.mcraft.kantanmemory.file.data.UserConfig;
-import org.mcraft.kantanmemory.kernel.data.UserWordData;
-import org.mcraft.kantanmemory.kernel.data.Word;
 
 public class DataReaderTestCase {
 	private DataReader dataReader;

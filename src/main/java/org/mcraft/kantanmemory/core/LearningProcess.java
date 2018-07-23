@@ -1,4 +1,4 @@
-package org.mcraft.kantanmemory.kernel;
+package org.mcraft.kantanmemory.core;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -9,10 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.mcraft.kantanmemory.kernel.data.FamiliarType;
-import org.mcraft.kantanmemory.kernel.data.LearningList;
-import org.mcraft.kantanmemory.kernel.data.LearningWordData;
-import org.mcraft.kantanmemory.kernel.data.UserWordData;
+import org.mcraft.kantanmemory.core.data.FamiliarType;
+import org.mcraft.kantanmemory.core.data.LearningList;
+import org.mcraft.kantanmemory.core.data.LearningWordData;
+import org.mcraft.kantanmemory.core.data.UserWordData;
 
 public class LearningProcess {
 	private LinkedList<UserWordData> newWordList = new LinkedList<UserWordData>();

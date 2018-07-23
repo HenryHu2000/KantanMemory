@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.mcraft.kantanmemory.kernel.data.Word;
+import org.mcraft.kantanmemory.core.data.Word;
 
 public class AppPanel extends JPanel {
 

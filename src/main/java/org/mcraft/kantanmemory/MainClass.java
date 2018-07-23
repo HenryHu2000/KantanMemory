@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import org.mcraft.kantanmemory.core.LearningListManager;
+import org.mcraft.kantanmemory.core.LearningProcess;
+import org.mcraft.kantanmemory.core.data.FamiliarType;
+import org.mcraft.kantanmemory.core.data.LearningList;
+import org.mcraft.kantanmemory.core.data.LearningWordData;
 import org.mcraft.kantanmemory.file.DataInitializer;
 import org.mcraft.kantanmemory.file.DataReader;
 import org.mcraft.kantanmemory.file.DataWriter;
@@ -15,11 +20,6 @@ import org.mcraft.kantanmemory.file.data.UserConfig;
 import org.mcraft.kantanmemory.graphics.AppFrame;
 import org.mcraft.kantanmemory.graphics.AppPanel;
 import org.mcraft.kantanmemory.graphics.PanelState;
-import org.mcraft.kantanmemory.kernel.LearningListManager;
-import org.mcraft.kantanmemory.kernel.LearningProcess;
-import org.mcraft.kantanmemory.kernel.data.FamiliarType;
-import org.mcraft.kantanmemory.kernel.data.LearningList;
-import org.mcraft.kantanmemory.kernel.data.LearningWordData;
 
 public class MainClass {
 

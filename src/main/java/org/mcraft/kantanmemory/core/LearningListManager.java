@@ -1,4 +1,4 @@
-package org.mcraft.kantanmemory.kernel;
+package org.mcraft.kantanmemory.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.mcraft.kantanmemory.core.data.LearningList;
+import org.mcraft.kantanmemory.core.data.UserWordData;
+import org.mcraft.kantanmemory.core.data.Word;
 import org.mcraft.kantanmemory.file.DataReader;
 import org.mcraft.kantanmemory.file.DataWriter;
 import org.mcraft.kantanmemory.file.data.UserConfig;
-import org.mcraft.kantanmemory.kernel.data.LearningList;
-import org.mcraft.kantanmemory.kernel.data.UserWordData;
-import org.mcraft.kantanmemory.kernel.data.Word;
 
 public class LearningListManager {
 	public LearningList generateLearningList(int newWordListSize, int revisionListSize) {
@@ -77,8 +77,7 @@ public class LearningListManager {
 
 	/**
 	 * 
-	 * @param learningList
-	 *            array of both new and revision words
+	 * @param learningList array of both new and revision words
 	 * @return whether successful
 	 */
 	public boolean saveLearningList(List<UserWordData> learningList) {

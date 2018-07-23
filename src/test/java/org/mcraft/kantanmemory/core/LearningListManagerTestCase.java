@@ -1,4 +1,4 @@
-package org.mcraft.kantanmemory.kernel;
+package org.mcraft.kantanmemory.core;
 
 import static org.junit.Assert.*;
 
@@ -19,13 +19,14 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mcraft.kantanmemory.core.LearningListManager;
+import org.mcraft.kantanmemory.core.data.LearningList;
+import org.mcraft.kantanmemory.core.data.UserWordData;
+import org.mcraft.kantanmemory.core.data.Word;
 import org.mcraft.kantanmemory.file.DataInitializer;
 import org.mcraft.kantanmemory.file.DataReader;
 import org.mcraft.kantanmemory.file.DataWriter;
 import org.mcraft.kantanmemory.file.data.UserConfig;
-import org.mcraft.kantanmemory.kernel.data.LearningList;
-import org.mcraft.kantanmemory.kernel.data.UserWordData;
-import org.mcraft.kantanmemory.kernel.data.Word;
 
 public class LearningListManagerTestCase {
 	private LearningListManager learningListManager;

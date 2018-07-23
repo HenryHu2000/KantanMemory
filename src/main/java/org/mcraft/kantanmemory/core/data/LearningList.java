@@ -1,4 +1,4 @@
-package org.mcraft.kantanmemory.kernel.data;
+package org.mcraft.kantanmemory.core.data;
 
 import java.util.ArrayList;
 
