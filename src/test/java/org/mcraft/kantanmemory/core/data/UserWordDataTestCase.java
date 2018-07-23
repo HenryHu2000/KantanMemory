@@ -1,6 +1,6 @@
 package org.mcraft.kantanmemory.core.data;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.Date;
 
