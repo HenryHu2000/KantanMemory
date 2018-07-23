@@ -1,6 +1,6 @@
 package org.mcraft.kantanmemory.core.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
@@ -9,8 +9,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mcraft.kantanmemory.core.data.UserWordData;
-import org.mcraft.kantanmemory.core.data.Word;
 
 public class UserWordDataTestCase {
 	private UserWordData userWordData;

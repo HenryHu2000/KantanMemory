@@ -1,6 +1,7 @@
 package org.mcraft.kantanmemory.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mcraft.kantanmemory.core.LearningListManager;
 import org.mcraft.kantanmemory.core.data.LearningList;
 import org.mcraft.kantanmemory.core.data.UserWordData;
 import org.mcraft.kantanmemory.core.data.Word;

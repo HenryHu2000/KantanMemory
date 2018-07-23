@@ -1,6 +1,6 @@
 package org.mcraft.kantanmemory.file;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,9 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mcraft.kantanmemory.core.data.UserWordData;
 import org.mcraft.kantanmemory.core.data.Word;
-import org.mcraft.kantanmemory.file.DataInitializer;
-import org.mcraft.kantanmemory.file.DataReader;
-import org.mcraft.kantanmemory.file.DataWriter;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
 public class DataWriterTestCase {

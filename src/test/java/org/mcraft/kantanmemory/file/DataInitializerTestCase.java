@@ -1,6 +1,7 @@
 package org.mcraft.kantanmemory.file;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mcraft.kantanmemory.file.DataInitializer;
 
 public class DataInitializerTestCase {
 	private DataInitializer dataInitializer;
