@@ -1,4 +1,4 @@
-# KantanMemory
+# KantanMemory [![Build Status](https://travis-ci.org/HenryHu2000/KantanMemory.svg?branch=master)](https://travis-ci.org/HenryHu2000/KantanMemory)
 A software that help memorizing Japanese vocabulary
 
 ## Outline
