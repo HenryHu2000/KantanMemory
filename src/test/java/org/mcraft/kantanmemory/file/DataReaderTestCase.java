@@ -17,6 +17,11 @@ import org.mcraft.kantanmemory.core.data.UserWordData;
 import org.mcraft.kantanmemory.core.data.Word;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class DataReaderTestCase {
 	private DataReader dataReader;
 

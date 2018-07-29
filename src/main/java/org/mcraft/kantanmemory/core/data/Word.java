@@ -1,5 +1,10 @@
 package org.mcraft.kantanmemory.core.data;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class Word implements Comparable<Word> {
 	private String name;
 	private String kana;

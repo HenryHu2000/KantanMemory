@@ -5,6 +5,11 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class AppFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;

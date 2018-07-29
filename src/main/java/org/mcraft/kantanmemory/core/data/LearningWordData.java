@@ -2,6 +2,11 @@ package org.mcraft.kantanmemory.core.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class LearningWordData extends UserWordData {
 	@JsonIgnore
 	private FamiliarType familiarType;

@@ -2,6 +2,11 @@ package org.mcraft.kantanmemory.core.data;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class LearningList {
 	private ArrayList<UserWordData> newWordList;
 	private ArrayList<UserWordData> revisionList;

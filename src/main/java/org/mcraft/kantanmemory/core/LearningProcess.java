@@ -14,6 +14,11 @@ import org.mcraft.kantanmemory.core.data.LearningList;
 import org.mcraft.kantanmemory.core.data.LearningWordData;
 import org.mcraft.kantanmemory.core.data.UserWordData;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class LearningProcess {
 	private LinkedList<UserWordData> newWordList = new LinkedList<UserWordData>();
 	private LinkedList<UserWordData> finishedWordList = new LinkedList<UserWordData>();

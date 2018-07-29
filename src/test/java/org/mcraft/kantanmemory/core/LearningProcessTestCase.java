@@ -24,6 +24,11 @@ import org.mcraft.kantanmemory.file.DataReader;
 import org.mcraft.kantanmemory.file.DataWriter;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class LearningProcessTestCase {
 	private LearningProcess learningProcess;
 

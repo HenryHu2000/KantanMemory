@@ -19,6 +19,11 @@ import org.mcraft.kantanmemory.file.data.UserConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class DataReader {
 	private String wordlistDir;
 	private String dataDir;

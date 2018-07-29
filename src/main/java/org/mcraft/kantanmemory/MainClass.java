@@ -21,6 +21,11 @@ import org.mcraft.kantanmemory.graphics.AppFrame;
 import org.mcraft.kantanmemory.graphics.AppPanel;
 import org.mcraft.kantanmemory.graphics.PanelState;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class MainClass {
 
 	public static void main(String[] args) {

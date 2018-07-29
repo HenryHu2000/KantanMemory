@@ -6,6 +6,11 @@ import java.util.TreeMap;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class UserConfig {
 	@JsonProperty("progresses_of_wordlists")
 	private TreeMap<String, Integer> progressesOfWordlists; // Index of the last word learned

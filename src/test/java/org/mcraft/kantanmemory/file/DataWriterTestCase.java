@@ -12,6 +12,11 @@ import org.mcraft.kantanmemory.core.data.Word;
 import org.mcraft.kantanmemory.file.DataInitializer;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class DataWriterTestCase {
 	private DataWriter dataWriter;
 

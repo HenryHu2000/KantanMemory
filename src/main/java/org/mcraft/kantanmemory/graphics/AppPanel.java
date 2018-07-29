@@ -9,6 +9,11 @@ import javax.swing.border.EmptyBorder;
 
 import org.mcraft.kantanmemory.core.data.Word;
 
+/**
+ * 
+ * @author Henry Hu
+ *
+ */
 public class AppPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
