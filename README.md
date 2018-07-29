@@ -1,5 +1,5 @@
 # KantanMemory [![Build Status](https://travis-ci.org/HenryHu2000/KantanMemory.svg?branch=master)](https://travis-ci.org/HenryHu2000/KantanMemory)
-A software that help memorizing Japanese vocabulary
+A Japanese vocabulary learning software
 
 ## Outline
 
@@ -27,8 +27,8 @@ License: LGPLv3
   - Chinese
   - English
   - Japanese
-- Multiple wordlists provided in package (future plan)
-- User's customized wordlist (future plan)
+- Multiple wordlists provided in package
+- User's customized wordlist
 - Read out the word (future plan)
   - Japanese text-to-speech
 - Sync learning data to the cloud (future plan)
@@ -54,15 +54,15 @@ License: LGPLv3
     - New studying part: A proportion of the words consists of new words added into the memorizing word list
       - Specific amount of words everyday
       - From the software's default wordlist in software's package
-      - Choose the word lists based on the user's choice in multiple/custom word list (future plan)
+      - Choose the word lists based on the user's choice in multiple/custom word list
     - Revision part: Other proportion consists of old words
       - Selected from learning data, according to forgetting curve algorithm
 - Process manager
-  - Individual word manager
+  - Manage individual words
     - Based on how familiar the user is with an individual word, decides:
       - Should the user memorize the word again later
       - The familiarity of that word
-  - Unrecognized word list manager
+  - Manage unrecognized word list
     - Add the user's unrecognized words again into the daily memorizing word list
 
 ##### Data-related structures
@@ -91,7 +91,7 @@ Includes:
     - User's familiarity of the word
 
 #### Custom learning resource
-- Customized wordlist (future plan)
+- Customized wordlist
   - Customized word lists added by the user
   - Can be chosen for new words added into daily word list
 
