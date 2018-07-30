@@ -169,24 +169,50 @@ public class MainClass {
 		final LearningListManager learningListManager = new LearningListManager();
 
 		int newWordNum = 0;
-		final int defaultNewWordNum = 10;
+		int revisionWordNum = 0;
 		while (true) {
 			try {
-				Object newWordNumObj = JOptionPane.showInputDialog(frame,
-						"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>",
-						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null,
-						new Integer[] { 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100 }, defaultNewWordNum);
-				if (newWordNumObj == null) {
+				String[] learningModes = new String[] { "New word mode", "Review mode" };
+				Object learningModeObj = JOptionPane.showInputDialog(frame,
+						"<html><font size=+2>" + "New word mode or review mode?" + "</font></html>",
+						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, learningModes, learningModes[0]);
+
+				if (learningModeObj == null) {
 					System.exit(0);
+				} else if (learningModeObj.equals(learningModes[0])) {
+
+					// New word mode
+					final int defaultNewWordNum = 10;
+					Object newWordNumObj = JOptionPane.showInputDialog(frame,
+							"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>",
+							AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null,
+							new Integer[] { 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100 }, defaultNewWordNum);
+					if (newWordNumObj == null) {
+						System.exit(0);
+					}
+					newWordNum = (int) newWordNumObj;
+					revisionWordNum = newWordNum * 5;
+
+				} else if (learningModeObj.equals(learningModes[1])) {
+
+					// Review mode
+					final int defaultRevisionWordNum = 50;
+					Object revisionWordNumObj = JOptionPane.showInputDialog(frame,
+							"<html><font size=+2>" + "How many words do you want to review?" + "</font></html>",
+							AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null,
+							new Integer[] { 25, 50, 75, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500 },
+							defaultRevisionWordNum);
+					if (revisionWordNumObj == null) {
+						System.exit(0);
+					}
+					revisionWordNum = (int) revisionWordNumObj;
+					newWordNum = 0;
 				}
-				newWordNum = (int) newWordNumObj;
-				if (newWordNum >= 0) {
-					break;
-				}
+				break;
 			} catch (Exception e) {
 			}
 		}
-		LearningList learningList = learningListManager.generateLearningList(newWordNum, newWordNum * 5);
+		LearningList learningList = learningListManager.generateLearningList(newWordNum, revisionWordNum);
 		final LearningProcess learningProcess = new LearningProcess(learningList);
 
 		// Set listeners for GUI buttons
@@ -265,7 +291,11 @@ public class MainClass {
 			appPanel.refreshPanel(learningProcess.getCurrentWordData().getWord());
 		} else {
 			appPanel.initializePanel();
-			appPanel.getWordLabel().setText("All words finished!");
+			if (!learningProcess.getAllWords().isEmpty()) {
+				appPanel.getWordLabel().setText("All words finished!");
+			} else {
+				appPanel.getWordLabel().setText("No word exists!");
+			}
 		}
 
 		frame.addWindowListener(new WindowAdapter() {
