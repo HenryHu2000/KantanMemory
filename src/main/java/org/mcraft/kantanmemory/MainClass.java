@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -133,55 +132,46 @@ public class MainClass {
 		// Initialize GUI
 		final AppFrame frame = new AppFrame();
 
-		Scanner in = new Scanner(System.in);
-
 		new DataInitializer().initializeAll();
 		UserConfig config = new DataReader().getConfig();
-
-		String wordlist = "";
-		String[] wordlists = config.getWordlists().toArray(new String[config.getWordlists().size()]);
-		while (true) {
-			try {
-				wordlist = (String) JOptionPane.showInputDialog(frame,
-						"<html><font size=+2>" + "Which word list do you want to learn? (enter file name)"
-								+ "</font></html>",
-						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, wordlists,
-						config.getCurrentWordlist() != null ? config.getCurrentWordlist() : wordlists[0]);
-				if (wordlist == null) {
-					System.exit(0);
-				}
-				if (config.getWordlists().contains(wordlist)) {
-					break;
-				}
-			} catch (Exception e) {
-			}
-		}
-		config.setCurrentWordlist(wordlist);
-		new DataWriter().saveConfig(config);
-
-		// Handle end of word list case
-		if (new DataReader().getWordlist(wordlist).length <= config.getWordlistProgress(wordlist)) {
-			// End of word list
-			JOptionPane.showMessageDialog(frame,
-					"<html><font size=+2>" + "Word list already finished!" + "</font></html>");
-		}
-
-		final LearningListManager learningListManager = new LearningListManager();
 
 		int newWordNum = 0;
 		int revisionWordNum = 0;
 		while (true) {
 			try {
 				String[] learningModes = new String[] { "New word mode", "Review mode" };
-				Object learningModeObj = JOptionPane.showInputDialog(frame,
+				String learningMode = (String) JOptionPane.showInputDialog(frame,
 						"<html><font size=+2>" + "New word mode or review mode?" + "</font></html>",
 						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, learningModes, learningModes[0]);
 
-				if (learningModeObj == null) {
+				if (learningMode == null) {
 					System.exit(0);
-				} else if (learningModeObj.equals(learningModes[0])) {
-
+				} else if (learningMode.equals(learningModes[0])) {
 					// New word mode
+
+					// Choose the word list to learn new words from
+					String wordlist = "";
+					String[] wordlists = config.getWordlists().toArray(new String[config.getWordlists().size()]);
+					wordlist = (String) JOptionPane.showInputDialog(frame,
+							"<html><font size=+2>" + "Which word list do you want to learn? (enter file name)"
+									+ "</font></html>",
+							AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, wordlists,
+							config.getCurrentWordlist() != null ? config.getCurrentWordlist() : wordlists[0]);
+					if (wordlist == null) {
+						System.exit(0);
+					}
+					config.setCurrentWordlist(wordlist);
+					new DataWriter().saveConfig(config);
+
+					// Handle end of word list case
+					if (new DataReader().getWordlist(wordlist).length <= config.getWordlistProgress(wordlist)) {
+						// End of word list
+						JOptionPane.showMessageDialog(frame,
+								"<html><font size=+2>" + "Word list already finished!" + "</font></html>");
+						continue;
+					}
+
+					// Prompt to ask for number of new words
 					final int defaultNewWordNum = 10;
 					Object newWordNumObj = JOptionPane.showInputDialog(frame,
 							"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>",
@@ -193,9 +183,10 @@ public class MainClass {
 					newWordNum = (int) newWordNumObj;
 					revisionWordNum = newWordNum * 5;
 
-				} else if (learningModeObj.equals(learningModes[1])) {
-
+				} else if (learningMode.equals(learningModes[1])) {
 					// Review mode
+
+					// Prompt to ask for number of revision words
 					final int defaultRevisionWordNum = 50;
 					Object revisionWordNumObj = JOptionPane.showInputDialog(frame,
 							"<html><font size=+2>" + "How many words do you want to review?" + "</font></html>",
@@ -212,6 +203,7 @@ public class MainClass {
 			} catch (Exception e) {
 			}
 		}
+		final LearningListManager learningListManager = new LearningListManager();
 		LearningList learningList = learningListManager.generateLearningList(newWordNum, revisionWordNum);
 		final LearningProcess learningProcess = new LearningProcess(learningList);
 
@@ -306,7 +298,6 @@ public class MainClass {
 			}
 		});
 
-		in.close();
 	}
 
 }

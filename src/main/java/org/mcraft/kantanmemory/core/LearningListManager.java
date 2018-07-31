@@ -38,6 +38,10 @@ public class LearningListManager {
 
 		UserConfig config = new DataReader().getConfig();
 		String currentWordlistName = config.getCurrentWordlist();
+		// Handle null or empty current word list case
+		if (currentWordlistName == null || currentWordlistName.isEmpty()) {
+			return newWordList;
+		}
 		Word[] currentWordlist = new DataReader().getWordlist(currentWordlistName);
 
 		int wordlistProgress = config.getWordlistProgress(currentWordlistName);

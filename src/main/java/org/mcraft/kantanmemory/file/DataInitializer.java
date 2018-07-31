@@ -96,6 +96,7 @@ public class DataInitializer {
 		if (wordlistFolder.exists() && wordlistFolder.isDirectory()) {
 			for (File wordlist : wordlistFolder.listFiles()) {
 				if (!config.getWordlists().contains(wordlist.getName())) {
+					// Add newly found word lists to the config file
 					config.setWordlistProgress(wordlist.getName(), 0);
 				}
 			}
