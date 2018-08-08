@@ -117,7 +117,7 @@ public class UserWordData implements Comparable<UserWordData> {
 
 	public void setFamiliarity(int familiarity) {
 		if (familiarity < MIN_FAMILIARITY) {
-			this.familiarity = MAX_FAMILIARITY;
+			this.familiarity = MIN_FAMILIARITY;
 		} else if (familiarity > MAX_FAMILIARITY) {
 			this.familiarity = MAX_FAMILIARITY;
 		} else {
