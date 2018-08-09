@@ -113,14 +113,6 @@ public class AppPanel extends JPanel {
 		this.translationLabel = translationLabel;
 	}
 
-	public JButton getContinueButton() {
-		return continueButton;
-	}
-
-	public void setContinueButton(JButton continueButton) {
-		this.continueButton = continueButton;
-	}
-
 	public PanelState getState() {
 		return state;
 	}
@@ -143,6 +135,14 @@ public class AppPanel extends JPanel {
 
 	public void setUnknownButton(JButton unknownButton) {
 		this.unknownButton = unknownButton;
+	}
+
+	public JButton getContinueButton() {
+		return continueButton;
+	}
+
+	public void setContinueButton(JButton continueButton) {
+		this.continueButton = continueButton;
 	}
 
 	public boolean isKnown() {

@@ -233,8 +233,7 @@ public class LearningProcessTestCase {
 				learningProcess.getNumbersOfTypes().get(KnownType.UNKNOWN).intValue());
 		assertEquals("Incorrect half-known number", 10,
 				learningProcess.getNumbersOfTypes().get(KnownType.HALF_KNOWN).intValue());
-		assertEquals("Incorrect known number", 5,
-				learningProcess.getNumbersOfTypes().get(KnownType.KNOWN).intValue());
+		assertEquals("Incorrect known number", 5, learningProcess.getNumbersOfTypes().get(KnownType.KNOWN).intValue());
 
 	}
 
