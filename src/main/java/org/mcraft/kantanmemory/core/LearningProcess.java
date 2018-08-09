@@ -59,10 +59,10 @@ public class LearningProcess {
 
 	/**
 	 * 
-	 * @param isFamiliar
+	 * @param isKnown
 	 * @return false if there is no current word
 	 */
-	private boolean handleCurrent(boolean isFamiliar) {
+	private boolean handleCurrent(boolean isKnown) {
 
 		LearningWordData currentWordData = getCurrentWordData();
 
@@ -72,7 +72,7 @@ public class LearningProcess {
 
 		currentWordData.updateLastSeenTime();
 
-		if (isFamiliar) {
+		if (isKnown) {
 			switch (currentWordData.getKnownType()) {
 			case KNOWN:
 			case HALF_KNOWN:
