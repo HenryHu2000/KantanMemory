@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import org.mcraft.kantanmemory.core.LearningListManager;
 import org.mcraft.kantanmemory.core.LearningProcess;
-import org.mcraft.kantanmemory.core.data.FamiliarType;
+import org.mcraft.kantanmemory.core.data.KnownType;
 import org.mcraft.kantanmemory.core.data.LearningList;
 import org.mcraft.kantanmemory.core.data.LearningWordData;
 import org.mcraft.kantanmemory.file.DataInitializer;
@@ -71,23 +71,23 @@ public class MainClass {
 
 		while (!learningProcess.isTerminated()) {
 			LearningWordData wordData = learningProcess.getCurrentWordData();
-			boolean isFamiliar = false;
-			switch (wordData.getFamiliarType()) {
-			case FAMILIAR:
-			case HALF_FAMILIAR:
+			boolean isKnown = false;
+			switch (wordData.getKnownType()) {
+			case KNOWN:
+			case HALF_KNOWN:
 				System.out.println(wordData.getWord().getKana());
 				System.out.println("Do you know this word?");
-				isFamiliar = readYesOrNo();
-				if (!isFamiliar) {
+				isKnown = readYesOrNo();
+				if (!isKnown) {
 					System.out.println(wordData.getWord().getName());
 					System.out.println("Do you know this word now?");
 					readYesOrNo();
 				}
 				break;
-			case UNFAMILIAR:
+			case UNKNOWN:
 				System.out.println(wordData.getWord().getName());
 				System.out.println("Do you know this word?");
-				isFamiliar = readYesOrNo();
+				isKnown = readYesOrNo();
 				break;
 			}
 			System.out.println();
@@ -97,10 +97,10 @@ public class MainClass {
 			System.out.println(wordData.getWord().getName());
 			System.out.println(wordData.getWord().getTranslation());
 
-			learningProcess.proceed(isFamiliar);
+			learningProcess.proceed(isKnown);
 
 			// Handle program closed when unfinished case
-			if (wordData.getFamiliarType() == FamiliarType.FAMILIAR) {
+			if (wordData.getKnownType() == KnownType.KNOWN) {
 				learningListManager.saveLearningList(learningProcess.getFinishedWordList());
 				learningProcess.getFinishedWordList().clear();
 			}
@@ -208,20 +208,20 @@ public class MainClass {
 		final LearningProcess learningProcess = new LearningProcess(learningList);
 
 		// Set listeners for GUI buttons
-		frame.getAppPanel().getFamiliarButton().addActionListener(new ActionListener() {
+		frame.getAppPanel().getKnownButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				AppPanel appPanel = frame.getAppPanel();
 				switch (appPanel.getState()) {
 				case KANA_QUESTION:
-					appPanel.setFamiliar(true);
+					appPanel.setKnown(true);
 					break;
 				case WORD_QUESTION:
-					if (learningProcess.getCurrentWordData().getFamiliarType() != FamiliarType.UNFAMILIAR) {
-						// Familiar and half-familiar words are expected to be familiar at the first try
-						appPanel.setFamiliar(false);
+					if (learningProcess.getCurrentWordData().getKnownType() != KnownType.UNKNOWN) {
+						// Known and half-known words are expected to be known at the first try
+						appPanel.setKnown(false);
 					} else {
-						appPanel.setFamiliar(true);
+						appPanel.setKnown(true);
 					}
 					break;
 				default:
@@ -232,17 +232,17 @@ public class MainClass {
 
 			}
 		});
-		frame.getAppPanel().getUnfamiliarButton().addActionListener(new ActionListener() {
+		frame.getAppPanel().getUnknownButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				AppPanel appPanel = frame.getAppPanel();
 				switch (appPanel.getState()) {
 				case KANA_QUESTION:
-					appPanel.setFamiliar(false);
+					appPanel.setKnown(false);
 					appPanel.setState(PanelState.WORD_QUESTION);
 					break;
 				case WORD_QUESTION:
-					appPanel.setFamiliar(false);
+					appPanel.setKnown(false);
 					appPanel.setState(PanelState.ANSWER);
 					break;
 				default:
@@ -259,14 +259,14 @@ public class MainClass {
 
 				AppPanel appPanel = frame.getAppPanel();
 				if (appPanel.getState() == PanelState.ANSWER) {
-					learningProcess.proceed(appPanel.isFamiliar());
+					learningProcess.proceed(appPanel.isKnown());
 					if (learningProcess.isTerminated()) {
 						appPanel.initializePanel();
 						appPanel.getWordLabel().setText("All words finished!");
 						learningListManager.saveLearningList(learningProcess.getFinishedWordList());
 						return;
 					}
-					if (learningProcess.getCurrentWordData().getFamiliarType() != FamiliarType.UNFAMILIAR) {
+					if (learningProcess.getCurrentWordData().getKnownType() != KnownType.UNKNOWN) {
 						appPanel.setState(PanelState.KANA_QUESTION);
 					} else {
 						appPanel.setState(PanelState.WORD_QUESTION);

@@ -21,13 +21,13 @@ public class AppPanel extends JPanel {
 	private JLabel wordLabel;
 	private JLabel translationLabel;
 
-	private JButton familiarButton;
-	private JButton unfamiliarButton;
+	private JButton knownButton;
+	private JButton unknownButton;
 	private JButton continueButton;
 
 	private PanelState state;
 
-	private boolean isFamiliar;
+	private boolean isKnown;
 
 	public AppPanel() {
 
@@ -38,17 +38,17 @@ public class AppPanel extends JPanel {
 		wordLabel.setFont(labelFont);
 		translationLabel.setFont(labelFont);
 
-		String familiarButtonText = "I know this word";
-		String unfamiliarButtonText = "I don't know";
+		String knownButtonText = "I know this word";
+		String unknownButtonText = "I don't know";
 		String continueButtonText = "Continue";
 
-		familiarButton = new JButton(familiarButtonText);
-		unfamiliarButton = new JButton(unfamiliarButtonText);
+		knownButton = new JButton(knownButtonText);
+		unknownButton = new JButton(unknownButtonText);
 		continueButton = new JButton(continueButtonText);
 
 		Font buttonFont = new Font(Font.SANS_SERIF, Font.BOLD, 48);
-		familiarButton.setFont(buttonFont);
-		unfamiliarButton.setFont(buttonFont);
+		knownButton.setFont(buttonFont);
+		unknownButton.setFont(buttonFont);
 		continueButton.setFont(buttonFont);
 
 		this.setBorder(new EmptyBorder(20, 30, 20, 30));
@@ -56,8 +56,8 @@ public class AppPanel extends JPanel {
 		this.add(wordLabel);
 		this.add(translationLabel);
 
-		this.add(familiarButton);
-		this.add(unfamiliarButton);
+		this.add(knownButton);
+		this.add(unknownButton);
 		this.add(continueButton);
 	}
 
@@ -66,14 +66,14 @@ public class AppPanel extends JPanel {
 		case KANA_QUESTION:
 			initializePanel();
 			wordLabel.setText(word.getKana());
-			familiarButton.setEnabled(true);
-			unfamiliarButton.setEnabled(true);
+			knownButton.setEnabled(true);
+			unknownButton.setEnabled(true);
 			break;
 		case WORD_QUESTION:
 			initializePanel();
 			wordLabel.setText(word.getName() + (word.getAccent() != -1 ? "(" + word.getAccent() + ")" : ""));
-			familiarButton.setEnabled(true);
-			unfamiliarButton.setEnabled(true);
+			knownButton.setEnabled(true);
+			unknownButton.setEnabled(true);
 			break;
 		case ANSWER:
 			initializePanel();
@@ -92,8 +92,8 @@ public class AppPanel extends JPanel {
 		wordLabel.setText("");
 		translationLabel.setText("");
 
-		familiarButton.setEnabled(false);
-		unfamiliarButton.setEnabled(false);
+		knownButton.setEnabled(false);
+		unknownButton.setEnabled(false);
 		continueButton.setEnabled(false);
 	}
 
@@ -113,22 +113,6 @@ public class AppPanel extends JPanel {
 		this.translationLabel = translationLabel;
 	}
 
-	public JButton getFamiliarButton() {
-		return familiarButton;
-	}
-
-	public void setFamiliarButton(JButton familiarButton) {
-		this.familiarButton = familiarButton;
-	}
-
-	public JButton getUnfamiliarButton() {
-		return unfamiliarButton;
-	}
-
-	public void setUnfamiliarButton(JButton unfamiliarButton) {
-		this.unfamiliarButton = unfamiliarButton;
-	}
-
 	public JButton getContinueButton() {
 		return continueButton;
 	}
@@ -145,12 +129,28 @@ public class AppPanel extends JPanel {
 		this.state = state;
 	}
 
-	public boolean isFamiliar() {
-		return isFamiliar;
+	public JButton getKnownButton() {
+		return knownButton;
 	}
 
-	public void setFamiliar(boolean isFamiliar) {
-		this.isFamiliar = isFamiliar;
+	public void setKnownButton(JButton knownButton) {
+		this.knownButton = knownButton;
+	}
+
+	public JButton getUnknownButton() {
+		return unknownButton;
+	}
+
+	public void setUnknownButton(JButton unknownButton) {
+		this.unknownButton = unknownButton;
+	}
+
+	public boolean isKnown() {
+		return isKnown;
+	}
+
+	public void setKnown(boolean isKnown) {
+		this.isKnown = isKnown;
 	}
 
 }

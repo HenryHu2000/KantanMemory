@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.mcraft.kantanmemory.core.data.FamiliarType;
+import org.mcraft.kantanmemory.core.data.KnownType;
 import org.mcraft.kantanmemory.core.data.LearningList;
 import org.mcraft.kantanmemory.core.data.LearningWordData;
 import org.mcraft.kantanmemory.core.data.UserWordData;
@@ -41,12 +41,12 @@ public class LearningProcess {
 		}
 	}
 
-	public void proceed(boolean isFamiliar) {
+	public void proceed(boolean isKnown) {
 		if (isTerminated) {
 			return;
 		}
 
-		boolean isCurrentExist = handleCurrent(isFamiliar);
+		boolean isCurrentExist = handleCurrent(isKnown);
 		if (!isCurrentExist) {
 			addNewWordToQueue();
 		}
@@ -73,15 +73,15 @@ public class LearningProcess {
 		currentWordData.updateLastSeenTime();
 
 		if (isFamiliar) {
-			switch (currentWordData.getFamiliarType()) {
-			case FAMILIAR:
-			case HALF_FAMILIAR:
-				currentWordData.setFamiliarType(FamiliarType.FAMILIAR);
+			switch (currentWordData.getKnownType()) {
+			case KNOWN:
+			case HALF_KNOWN:
+				currentWordData.setKnownType(KnownType.KNOWN);
 				currentWordData.upgradeFamiliarity();
 				moveWordToFinished();
 				break;
-			case UNFAMILIAR:
-				currentWordData.setFamiliarType(FamiliarType.HALF_FAMILIAR);
+			case UNKNOWN:
+				currentWordData.setKnownType(KnownType.HALF_KNOWN);
 				moveWordToQueueBack();
 				break;
 			default:
@@ -89,7 +89,7 @@ public class LearningProcess {
 
 			}
 		} else {
-			currentWordData.setFamiliarType(FamiliarType.UNFAMILIAR);
+			currentWordData.setKnownType(KnownType.UNKNOWN);
 			currentWordData.downgradeFamiliarity();
 			moveWordToQueueBack();
 		}
@@ -139,28 +139,28 @@ public class LearningProcess {
 		learningWordQueue.addFirst(wordData);
 	}
 
-	public EnumMap<FamiliarType, Integer> getNumbersOfTypes() {
-		Map<FamiliarType, Integer> numOfTypesMap = new HashMap<FamiliarType, Integer>();
-		numOfTypesMap.put(FamiliarType.UNFAMILIAR, 0);
-		numOfTypesMap.put(FamiliarType.HALF_FAMILIAR, 0);
-		numOfTypesMap.put(FamiliarType.FAMILIAR, 0);
+	public EnumMap<KnownType, Integer> getNumbersOfTypes() {
+		Map<KnownType, Integer> numOfTypesMap = new HashMap<KnownType, Integer>();
+		numOfTypesMap.put(KnownType.UNKNOWN, 0);
+		numOfTypesMap.put(KnownType.HALF_KNOWN, 0);
+		numOfTypesMap.put(KnownType.KNOWN, 0);
 
 		for (LearningWordData wordData : learningWordQueue) {
-			switch (wordData.getFamiliarType()) {
-			case FAMILIAR:
-				numOfTypesMap.put(FamiliarType.FAMILIAR, numOfTypesMap.get(FamiliarType.FAMILIAR) + 1);
+			switch (wordData.getKnownType()) {
+			case KNOWN:
+				numOfTypesMap.put(KnownType.KNOWN, numOfTypesMap.get(KnownType.KNOWN) + 1);
 				break;
-			case HALF_FAMILIAR:
-				numOfTypesMap.put(FamiliarType.HALF_FAMILIAR, numOfTypesMap.get(FamiliarType.HALF_FAMILIAR) + 1);
+			case HALF_KNOWN:
+				numOfTypesMap.put(KnownType.HALF_KNOWN, numOfTypesMap.get(KnownType.HALF_KNOWN) + 1);
 				break;
-			case UNFAMILIAR:
-				numOfTypesMap.put(FamiliarType.UNFAMILIAR, numOfTypesMap.get(FamiliarType.UNFAMILIAR) + 1);
+			case UNKNOWN:
+				numOfTypesMap.put(KnownType.UNKNOWN, numOfTypesMap.get(KnownType.UNKNOWN) + 1);
 				break;
 			default:
 				break;
 			}
 		}
-		return new EnumMap<FamiliarType, Integer>(numOfTypesMap);
+		return new EnumMap<KnownType, Integer>(numOfTypesMap);
 	}
 
 	public LinkedList<UserWordData> getNewWordList() {

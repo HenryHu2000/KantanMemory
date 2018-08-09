@@ -5,6 +5,6 @@ package org.mcraft.kantanmemory.core.data;
  * @author Henry Hu
  *
  */
-public enum FamiliarType {
-	UNFAMILIAR, HALF_FAMILIAR, FAMILIAR;
+public enum KnownType {
+	UNKNOWN, HALF_KNOWN, KNOWN;
 }

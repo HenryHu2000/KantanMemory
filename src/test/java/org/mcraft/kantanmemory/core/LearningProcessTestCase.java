@@ -14,7 +14,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mcraft.kantanmemory.core.data.FamiliarType;
+import org.mcraft.kantanmemory.core.data.KnownType;
 import org.mcraft.kantanmemory.core.data.LearningList;
 import org.mcraft.kantanmemory.core.data.LearningWordData;
 import org.mcraft.kantanmemory.core.data.UserWordData;
@@ -151,8 +151,8 @@ public class LearningProcessTestCase {
 	public final void testProceedSingleWord() {
 		LearningWordData data = null;
 
-		boolean isHalfFamiliarTested = false;
-		boolean isUnfamiliarTested = false;
+		boolean isHalfKnownTested = false;
+		boolean isUnknownTested = false;
 
 		for (int i = 0; i < 1000; i++) {
 			if (learningProcess.isTerminated()) {
@@ -164,27 +164,27 @@ public class LearningProcessTestCase {
 			}
 
 			if (learningProcess.getCurrentWordData().equals(data)) {
-				switch (data.getFamiliarType()) {
-				case FAMILIAR:
-				case HALF_FAMILIAR:
-					if (!isHalfFamiliarTested) {
+				switch (data.getKnownType()) {
+				case KNOWN:
+				case HALF_KNOWN:
+					if (!isHalfKnownTested) {
 						learningProcess.proceed(false);
-						assertEquals("Wrong Familiar type", FamiliarType.UNFAMILIAR, data.getFamiliarType());
-						isHalfFamiliarTested = true;
+						assertEquals("Wrong Known type", KnownType.UNKNOWN, data.getKnownType());
+						isHalfKnownTested = true;
 					} else {
 						learningProcess.proceed(true);
-						assertEquals("Wrong Familiar type", FamiliarType.FAMILIAR, data.getFamiliarType());
+						assertEquals("Wrong Known type", KnownType.KNOWN, data.getKnownType());
 					}
 					break;
-				case UNFAMILIAR:
-					if (!isUnfamiliarTested) {
+				case UNKNOWN:
+					if (!isUnknownTested) {
 						learningProcess.proceed(false);
-						assertEquals("Wrong Familiar type", FamiliarType.UNFAMILIAR, data.getFamiliarType());
-						isUnfamiliarTested = true;
+						assertEquals("Wrong Known type", KnownType.UNKNOWN, data.getKnownType());
+						isUnknownTested = true;
 
 					} else {
 						learningProcess.proceed(true);
-						assertEquals("Wrong Familiar type", FamiliarType.HALF_FAMILIAR, data.getFamiliarType());
+						assertEquals("Wrong Known type", KnownType.HALF_KNOWN, data.getKnownType());
 					}
 					break;
 				default:
@@ -204,8 +204,8 @@ public class LearningProcessTestCase {
 		while (!learningProcess.isTerminated()) {
 			learningProcess.proceed(true);
 		}
-		assertTrue("Half-familiar case not tested", isHalfFamiliarTested);
-		assertTrue("Unfamiliar case not tested", isUnfamiliarTested);
+		assertTrue("Half-Known case not tested", isHalfKnownTested);
+		assertTrue("Unknown case not tested", isUnknownTested);
 
 	}
 
@@ -215,26 +215,26 @@ public class LearningProcessTestCase {
 		Word[] wordlist = new DataReader().getWordlist("Japanese-wordlist-1.csv");
 		int learningWordNum = 30;
 
-		// One unfamiliar word already in learning queue
+		// One unknown word already in learning queue
 		for (int i = 0; i < learningWordNum - 1; i++) {
 			LearningWordData learningWordData = new LearningWordData(new UserWordData(wordlist[i]));
 			if (i < 5) {
-				learningWordData.setFamiliarType(FamiliarType.FAMILIAR);
+				learningWordData.setKnownType(KnownType.KNOWN);
 			} else if (i >= 20) {
-				learningWordData.setFamiliarType(FamiliarType.HALF_FAMILIAR);
+				learningWordData.setKnownType(KnownType.HALF_KNOWN);
 			} else {
-				learningWordData.setFamiliarType(FamiliarType.UNFAMILIAR);
+				learningWordData.setKnownType(KnownType.UNKNOWN);
 			}
 
 			learningProcess.getLearningWordQueue().add(learningWordData);
 		}
 
-		assertEquals("Incorrect unfamiliar number", 15,
-				learningProcess.getNumbersOfTypes().get(FamiliarType.UNFAMILIAR).intValue());
-		assertEquals("Incorrect half-familiar number", 10,
-				learningProcess.getNumbersOfTypes().get(FamiliarType.HALF_FAMILIAR).intValue());
-		assertEquals("Incorrect familiar number", 5,
-				learningProcess.getNumbersOfTypes().get(FamiliarType.FAMILIAR).intValue());
+		assertEquals("Incorrect unknown number", 15,
+				learningProcess.getNumbersOfTypes().get(KnownType.UNKNOWN).intValue());
+		assertEquals("Incorrect half-known number", 10,
+				learningProcess.getNumbersOfTypes().get(KnownType.HALF_KNOWN).intValue());
+		assertEquals("Incorrect known number", 5,
+				learningProcess.getNumbersOfTypes().get(KnownType.KNOWN).intValue());
 
 	}
 

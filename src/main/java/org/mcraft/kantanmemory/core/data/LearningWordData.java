@@ -9,26 +9,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class LearningWordData extends UserWordData {
 	@JsonIgnore
-	private FamiliarType familiarType;
+	private KnownType knownType;
 
 	public LearningWordData(UserWordData userWordData) {
 		super(userWordData.getWord(), userWordData.getFamiliarity(), userWordData.getLastSeenDate());
-		setFamiliarType(FamiliarType.HALF_FAMILIAR);
+		setKnownType(KnownType.HALF_KNOWN);
 	}
 
-	public LearningWordData(UserWordData userWordData, FamiliarType familiarType) {
+	public LearningWordData(UserWordData userWordData, KnownType knownType) {
 		super(userWordData.getWord(), userWordData.getFamiliarity(), userWordData.getLastSeenDate());
-		this.setFamiliarType(familiarType);
+		this.setKnownType(knownType);
 	}
 
 	@JsonIgnore
-	public FamiliarType getFamiliarType() {
-		return familiarType;
+	public KnownType getKnownType() {
+		return knownType;
 	}
 
 	@JsonIgnore
-	public void setFamiliarType(FamiliarType familiarType) {
-		this.familiarType = familiarType;
+	public void setKnownType(KnownType knownType) {
+		this.knownType = knownType;
 	}
 
 }
