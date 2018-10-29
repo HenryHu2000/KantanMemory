@@ -28,8 +28,12 @@ import org.mcraft.kantanmemory.graphics.PanelState;
 public class MainClass {
 
 	public static void main(String[] args) {
-		// commandLineUI();
-		graphicalUI();
+
+		if (args.length >= 1 && args[0].equalsIgnoreCase("cmd")) {
+			commandLineUI();
+		} else {
+			graphicalUI();
+		}
 	}
 
 	public static void commandLineUI() {
@@ -123,6 +127,7 @@ public class MainClass {
 					return true;
 				case 'n':
 					return false;
+				default:
 				}
 			}
 		}
