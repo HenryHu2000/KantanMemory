@@ -21,8 +21,8 @@ public class AppFrame extends JFrame {
 	public AppFrame() throws HeadlessException {
 		super(FRAME_TITLE);
 
-		int width = 600;
-		int height = 800;
+		int width = 1200;
+		int height = 1600;
 		this.setSize(width, height);
 
 		this.setLocationRelativeTo(null);

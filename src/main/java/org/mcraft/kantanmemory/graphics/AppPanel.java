@@ -34,7 +34,7 @@ public class AppPanel extends JPanel {
 		wordLabel = new JLabel("", JLabel.CENTER);
 		translationLabel = new JLabel("", JLabel.CENTER);
 
-		Font labelFont = new Font(Font.SANS_SERIF, Font.BOLD, 48);
+		Font labelFont = new Font(Font.SANS_SERIF, Font.BOLD, 96);
 		wordLabel.setFont(labelFont);
 		translationLabel.setFont(labelFont);
 
@@ -46,12 +46,12 @@ public class AppPanel extends JPanel {
 		unknownButton = new JButton(unknownButtonText);
 		continueButton = new JButton(continueButtonText);
 
-		Font buttonFont = new Font(Font.SANS_SERIF, Font.BOLD, 48);
+		Font buttonFont = new Font(Font.SANS_SERIF, Font.BOLD, 96);
 		knownButton.setFont(buttonFont);
 		unknownButton.setFont(buttonFont);
 		continueButton.setFont(buttonFont);
 
-		this.setBorder(new EmptyBorder(20, 30, 20, 30));
+		this.setBorder(new EmptyBorder(40, 60, 40, 60));
 
 		this.add(wordLabel);
 		this.add(translationLabel);

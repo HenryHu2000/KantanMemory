@@ -146,7 +146,7 @@ public class MainClass {
 			try {
 				String[] learningModes = new String[] { "New word mode", "Review mode" };
 				String learningMode = (String) JOptionPane.showInputDialog(frame,
-						"<html><font size=+2>" + "New word mode or review mode?" + "</font></html>",
+						"<html><font size=+4>" + "New word mode or review mode?" + "</font></html>",
 						AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, learningModes, learningModes[0]);
 
 				if (learningMode == null) {
@@ -158,7 +158,7 @@ public class MainClass {
 					String wordlist = "";
 					String[] wordlists = config.getWordlists().toArray(new String[config.getWordlists().size()]);
 					wordlist = (String) JOptionPane.showInputDialog(frame,
-							"<html><font size=+2>" + "Which word list do you want to learn? (enter file name)"
+							"<html><font size=+4>" + "Which word list do you want to learn? (enter file name)"
 									+ "</font></html>",
 							AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null, wordlists,
 							config.getCurrentWordlist() != null ? config.getCurrentWordlist() : wordlists[0]);
@@ -172,14 +172,14 @@ public class MainClass {
 					if (new DataReader().getWordlist(wordlist).length <= config.getWordlistProgress(wordlist)) {
 						// End of word list
 						JOptionPane.showMessageDialog(frame,
-								"<html><font size=+2>" + "Word list already finished!" + "</font></html>");
+								"<html><font size=+4>" + "Word list already finished!" + "</font></html>");
 						continue;
 					}
 
 					// Prompt to ask for number of new words
 					final int defaultNewWordNum = 10;
 					Object newWordNumObj = JOptionPane.showInputDialog(frame,
-							"<html><font size=+2>" + "How many new words do you want to learn?" + "</font></html>",
+							"<html><font size=+4>" + "How many new words do you want to learn?" + "</font></html>",
 							AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null,
 							new Integer[] { 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100 }, defaultNewWordNum);
 					if (newWordNumObj == null) {
@@ -194,7 +194,7 @@ public class MainClass {
 					// Prompt to ask for number of revision words
 					final int defaultRevisionWordNum = 50;
 					Object revisionWordNumObj = JOptionPane.showInputDialog(frame,
-							"<html><font size=+2>" + "How many words do you want to review?" + "</font></html>",
+							"<html><font size=+4>" + "How many words do you want to review?" + "</font></html>",
 							AppFrame.FRAME_TITLE, JOptionPane.QUESTION_MESSAGE, null,
 							new Integer[] { 25, 50, 75, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500 },
 							defaultRevisionWordNum);
