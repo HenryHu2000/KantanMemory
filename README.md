@@ -11,7 +11,7 @@ Platforms:
   - Windows
 - Web-based version (future plan)
 
-License: LGPLv3
+License: MIT
 
 ### Planned features
 - Modes:
@@ -110,3 +110,10 @@ Includes:
      - Custom wordlist: wordlist created by the user himself
 - (Memorizing) process: in a daily word memorizing process, user need to go over each words in the daily wordlist
 - Familiar/known/recognized: user believes he know this word. If confirmed, the word will no longer appear later in the daily wordlist
+
+
+## Screenshots
+Learning Japanese:
+![Learning Japanese screenshot](img/Japanese.png)
+Learning German:
+![Learning German screenshot](img/German.png)
