@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 
-import org.mcraft.kantanmemory.core.data.UserWordData;
+import org.mcraft.kantanmemory.model.data.UserWordData;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

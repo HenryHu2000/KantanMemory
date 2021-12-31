@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 
-import org.mcraft.kantanmemory.core.data.UserWordData;
+import org.mcraft.kantanmemory.model.data.UserWordData;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
