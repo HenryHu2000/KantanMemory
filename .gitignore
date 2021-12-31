@@ -1,5 +1,7 @@
-/target/
-/.settings/
-/.vscode/
+.idea/
+.settings/
+.vscode/
+target/
 .classpath
 .project
+kantanmemory.iml

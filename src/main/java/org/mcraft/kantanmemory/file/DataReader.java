@@ -12,8 +12,8 @@ import java.util.TreeMap;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.mcraft.kantanmemory.core.data.UserWordData;
-import org.mcraft.kantanmemory.core.data.Word;
+import org.mcraft.kantanmemory.model.data.UserWordData;
+import org.mcraft.kantanmemory.model.data.Word;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

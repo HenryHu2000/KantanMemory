@@ -7,9 +7,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mcraft.kantanmemory.core.data.UserWordData;
-import org.mcraft.kantanmemory.core.data.Word;
-import org.mcraft.kantanmemory.file.DataInitializer;
+import org.mcraft.kantanmemory.model.data.UserWordData;
+import org.mcraft.kantanmemory.model.data.Word;
 import org.mcraft.kantanmemory.file.data.UserConfig;
 
 /**
