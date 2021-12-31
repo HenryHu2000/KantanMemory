@@ -75,6 +75,7 @@ Learning German:
 
 #### User learning data
 Format: YAML
+
 Includes:
 - List of words that the user has learned
   - Each word in the list records the following data:
@@ -89,6 +90,7 @@ Includes:
 
 ### Configuration
 Format: YAML
+
 Includes:
 - Progresses of each word list
 - Current word list chosen
